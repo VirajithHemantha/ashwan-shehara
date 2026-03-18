@@ -321,20 +321,20 @@ function RSVPForm() {
   return (
     <div data-no-flip className="w-full cursor-auto">
       <CheckCircle2 size={24} className="text-sage mb-2 md:mb-4 mx-auto opacity-70 md:w-8 md:h-8" />
-      <h4 className="serif text-xl md:text-3xl text-sage mb-2 md:mb-3 text-center">RSVP</h4>
-      <p className="text-[8px] md:text-xs text-zinc-500 uppercase tracking-widest mb-4 md:mb-6 text-center">
+      <h4 className="serif text-2xl md:text-3xl text-sage mb-2 md:mb-3 text-center">RSVP</h4>
+      <p className="text-[10px] md:text-xs text-zinc-500 uppercase tracking-widest mb-4 md:mb-6 text-center leading-relaxed">
         Please let us know by
         <br />
         May 1st, 2026
       </p>
 
-      <form onSubmit={submit} className="space-y-3 md:space-y-4 px-1 md:px-2">
+      <form onSubmit={submit} className="space-y-4 md:space-y-4 px-1 md:px-2">
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             data-no-flip
             onClick={() => setAttendance("yes")}
-            className={`py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
+            className={`py-3 md:py-2.5 rounded-xl text-[10px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
               attendance === "yes" ? "bg-sage text-white border-sage" : "bg-white/40 text-sage border-sage/30"
             }`}
           >
@@ -344,7 +344,7 @@ function RSVPForm() {
             type="button"
             data-no-flip
             onClick={() => setAttendance("no")}
-            className={`py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
+            className={`py-3 md:py-2.5 rounded-xl text-[10px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
               attendance === "no" ? "bg-zinc-800 text-white border-zinc-800" : "bg-white/40 text-zinc-700 border-zinc-300/60"
             }`}
           >
@@ -357,7 +357,7 @@ function RSVPForm() {
             type="button"
             data-no-flip
             onClick={() => setPartyType("individual")}
-            className={`py-2 rounded-xl text-[9px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
+            className={`py-3 md:py-2 rounded-xl text-[10px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
               partyType === "individual" ? "bg-sage/90 text-white border-sage" : "bg-white/40 text-sage border-sage/30"
             }`}
           >
@@ -367,7 +367,7 @@ function RSVPForm() {
             type="button"
             data-no-flip
             onClick={() => setPartyType("family")}
-            className={`py-2 rounded-xl text-[9px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
+            className={`py-3 md:py-2 rounded-xl text-[10px] md:text-xs uppercase tracking-widest font-bold border transition-colors ${
               partyType === "family" ? "bg-sage/90 text-white border-sage" : "bg-white/40 text-sage border-sage/30"
             }`}
           >
@@ -377,7 +377,7 @@ function RSVPForm() {
 
         {isAttending && partyType === "family" && (
           <div className="flex items-center justify-between gap-3">
-            <label className="text-[9px] md:text-xs uppercase tracking-widest font-bold text-zinc-600">Family Count</label>
+            <label className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-zinc-600">Family Count</label>
             <input
               data-no-flip
               type="number"
@@ -385,7 +385,7 @@ function RSVPForm() {
               max={12}
               value={effectiveGuestCount}
               onChange={(ev) => setGuestCount(Number(ev.target.value || 2))}
-              className="w-24 rounded-xl border border-sage/20 bg-white/60 px-3 py-2 text-[10px] md:text-xs text-zinc-700 outline-none"
+              className="w-28 rounded-xl border border-sage/20 bg-white/60 px-3 py-2.5 text-xs text-zinc-700 outline-none"
             />
           </div>
         )}
@@ -404,7 +404,7 @@ function RSVPForm() {
                       : "Your name"
                     : "Your name"
                 }
-                className="w-full rounded-xl border border-sage/20 bg-white/60 px-3 py-2 text-[10px] md:text-xs text-zinc-700 outline-none"
+                className="w-full rounded-xl border border-sage/20 bg-white/60 px-3 py-2.5 text-xs text-zinc-700 outline-none"
               />
 
               <select
@@ -412,7 +412,7 @@ function RSVPForm() {
                 disabled={!isAttending}
                 value={guest?.meal ?? "non-veg"}
                 onChange={(ev) => updateGuest(idx, { meal: ev.target.value as MealPreference })}
-                className={`w-full rounded-xl border border-sage/20 bg-white/60 px-3 py-2 text-[10px] md:text-xs text-zinc-700 outline-none ${
+                className={`w-full rounded-xl border border-sage/20 bg-white/60 px-3 py-2.5 text-xs text-zinc-700 outline-none ${
                   !isAttending ? "opacity-60" : ""
                 }`}
               >
@@ -430,13 +430,13 @@ function RSVPForm() {
           type="submit"
           data-no-flip
           disabled={submitting}
-          className="w-full bg-sage text-white py-2.5 md:py-3 rounded-xl text-[9px] md:text-xs uppercase tracking-widest font-bold disabled:opacity-60"
+          className="w-full bg-sage text-white py-3 md:py-3 rounded-xl text-[10px] md:text-xs uppercase tracking-widest font-bold disabled:opacity-60"
         >
           {submitting ? "Submitting..." : "Submit RSVP"}
         </button>
 
         {!endpoint && (
-          <p className="text-[9px] md:text-[10px] text-zinc-500">
+          <p className="text-[10px] md:text-[10px] text-zinc-500 leading-relaxed">
             Admin setup needed: set <span className="font-bold">VITE_RSVP_ENDPOINT</span> to your Google Apps Script URL.
           </p>
         )}
@@ -1230,10 +1230,10 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full h-full col-span-1"
+            className="w-full h-full col-span-2 lg:col-span-1"
           >
             <FlipCard
-              containerClassName="w-full h-[220px] md:h-[350px] lg:h-[350px]"
+              containerClassName="w-full h-[380px] md:h-[350px] lg:h-[350px]"
               front={
                 <div className="w-full h-full bg-[#F5EFE0] p-6 flex flex-col justify-center items-center text-center relative group overflow-hidden">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-sage/10 rounded-full blur-3xl pointer-events-none" />
@@ -1265,7 +1265,7 @@ export default function App() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.4 }}
-            className="w-full h-full col-span-1 flex items-center justify-center"
+            className="hidden sm:flex w-full h-full col-span-1 items-center justify-center"
           >
             <FlipCard
               containerClassName="w-full h-[220px] md:h-[350px] lg:h-[350px] flex items-center justify-center"
