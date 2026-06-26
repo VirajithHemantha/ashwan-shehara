@@ -34,6 +34,11 @@ export default function App() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  const guestPrefix = searchParams.get('prefix');
+  const guestName = searchParams.get('name');
+  const hasGuestInfo = guestPrefix && guestName;
+
   const startExperience = () => {
     setHasStarted(true);
     if (videoRef.current) {
@@ -154,6 +159,16 @@ export default function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center"
                 >
+                  {hasGuestInfo && (
+                    <div className="mb-12 md:mb-20 space-y-3 bg-black/30 px-8 py-6 rounded-2xl backdrop-blur-sm border border-white/20 shadow-2xl">
+                      <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-white/90 font-bold drop-shadow-md">
+                        We cordially invite
+                      </p>
+                      <p className="serif italic text-3xl md:text-5xl text-white drop-shadow-xl font-medium">
+                        {guestPrefix} {guestName}
+                      </p>
+                    </div>
+                  )}
                   <h1 className="script text-5xl md:text-7xl text-white drop-shadow-md mb-8">
                     Ashwan & Shehara
                   </h1>
@@ -218,7 +233,7 @@ export default function App() {
             transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
             className="relative z-10 text-center px-4"
           >
-            <h1 className="script text-6xl md:text-8xl lg:text-9xl text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+            <h1 className="script text-6xl md:text-8xl lg:text-9xl text-black drop-shadow-[0_4px_8px_rgba(255,255,255,0.5)]">
               Our Engagement Day
             </h1>
           </motion.div>
@@ -266,21 +281,28 @@ export default function App() {
           <img src="/hero-bg.png" alt="Background" className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none" />
           <div className="absolute inset-0 bg-white/40 pointer-events-none z-0" />
           <div className="relative z-10 w-full max-w-3xl flex flex-col items-center text-center space-y-6 md:space-y-12">
-            <div className="space-y-4 md:space-y-6">
-              <div className="space-y-1 md:space-y-2">
-                <h3 className="script text-4xl md:text-7xl text-zinc-700 drop-shadow-sm">Ashwan</h3>
-                <p className="text-[8px] md:text-xs uppercase tracking-[0.2em] text-zinc-500 font-medium">Son of Salaldeen Sadiyan & Kareema Sadiyan</p>
+            <div className="flex flex-col items-center">
+              <img src="/ChatGPT Image Jun 27, 2026, 01_56_48 AM.png" alt="Decoration" className="w-32 md:w-48 object-contain mb-4 drop-shadow-sm" />
+              <p className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">
+                "AND WE CREATED YOU IN PAIRS"
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center justify-center space-y-0">
+              <div className="flex flex-col items-center justify-center space-y-0 -mb-1">
+                <h3 className="script text-4xl md:text-7xl text-zinc-700 drop-shadow-sm leading-none">Ashwan</h3>
+                <p className="text-[8px] md:text-xs uppercase tracking-[0.2em] text-zinc-500 font-medium leading-tight">Son of Salaldeen Sadiyan</p>
               </div>
 
-              <div className="flex items-center justify-center gap-4 py-2 md:py-4">
+              <div className="flex items-center justify-center gap-4 py-0 my-0">
                 <div className="h-px w-12 md:w-24 bg-zinc-300" />
-                <span className="serif italic text-2xl md:text-4xl text-zinc-400">&amp;</span>
+                <span className="serif italic text-2xl md:text-4xl text-zinc-400 leading-none">&amp;</span>
                 <div className="h-px w-12 md:w-24 bg-zinc-300" />
               </div>
 
-              <div className="space-y-1 md:space-y-2">
-                <h3 className="script text-4xl md:text-7xl text-zinc-700 drop-shadow-sm">Shehara</h3>
-                <p className="text-[8px] md:text-xs uppercase tracking-[0.2em] text-zinc-500 font-medium">Daughter of Tuan Sherif Omar & Ning Kumala</p>
+              <div className="flex flex-col items-center justify-center space-y-0 -mt-1">
+                <h3 className="script text-4xl md:text-7xl text-zinc-700 drop-shadow-sm leading-none">Shehara</h3>
+                <p className="text-[8px] md:text-xs uppercase tracking-[0.2em] text-zinc-500 font-medium leading-tight">Daughter of Tuan Sherif Omar</p>
               </div>
             </div>
 
@@ -324,7 +346,7 @@ export default function App() {
         </section>
 
         {/* Section 5: Footer */}
-        <section className="w-full min-h-[50dvh] flex flex-col items-center justify-center py-20 px-4 border-t border-zinc-200 relative overflow-hidden">
+        <section className="w-full min-h-[100dvh] flex flex-col items-center justify-center py-20 px-4 border-t border-zinc-200 relative overflow-hidden">
           <img src="/hero-bg.png" alt="Background" className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none" />
           <div className="absolute inset-0 bg-white/40 pointer-events-none z-0" />
           <footer className="relative z-10 text-center space-y-8 w-full max-w-2xl mx-auto">
@@ -334,9 +356,13 @@ export default function App() {
               <div className="h-px w-16 bg-zinc-200" />
             </div>
 
-            <p className="serif italic text-zinc-500 text-2xl md:text-4xl leading-relaxed px-4">
-              "Come to join us"
+            <p className="serif italic text-zinc-500 text-lg md:text-xl leading-relaxed px-4 md:px-12 max-w-xl mx-auto">
+              Come &amp; join us in celebrating this special day as we gather with love and joy! Your presence will make this moment even more memorable
             </p>
+
+            <div className="flex justify-center pt-4">
+              <img src="/ChatGPT Image Jun 27, 2026, 02_02_52 AM.png" alt="Decoration" className="w-48 md:w-64 object-contain drop-shadow-sm opacity-90" />
+            </div>
 
             <p className="script text-4xl md:text-5xl text-zinc-600 mt-8">Ashwan &amp; Shehara</p>
           </footer>
