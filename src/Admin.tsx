@@ -23,18 +23,22 @@ const AdminPage = () => {
     const link = `${baseUrl}/?${params.toString()}`;
     setGeneratedLink(link);
 
-    const message = `Dear ${prefix} ${name.trim()} ❤️
+    const message = `Dear ${prefix} ${name.trim()},
 
-With joyful hearts, we warmly invite you and your family to celebrate one of the most special days of our lives as we begin our journey together.
+With joyful hearts, we warmly invite you to be a part of our engagement celebration as we begin this beautiful new journey together 🤍✨
 
-Please view our wedding invitation and all the event details through the link below 🌐:
+💍 Engagement Celebration
 
+✨ View our engagement invitation here:
+👇
 ${link}
 
-Your presence would truly mean the world to us, and we would be honored to celebrate this beautiful moment together.
+Your presence and blessings would truly mean so much to us and make our special day even more memorable 💕
 
-With love,
-❤️ Ashwan & Shehara`;
+Kindly let us know if you’ll be able to join us 🗓️
+
+With Love,
+Ashwan & Shehara 💖`;
 
     setGeneratedMessage(message);
     setCopiedLink(false);
