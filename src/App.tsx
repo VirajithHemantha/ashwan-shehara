@@ -41,10 +41,12 @@ export default function App() {
 
   const startExperience = () => {
     setHasStarted(true);
+    setIsMuted(false);
     if (videoRef.current) {
       videoRef.current.play().catch(console.error);
     }
-    if (audioRef.current && !isMuted) {
+    if (audioRef.current) {
+      audioRef.current.muted = false;
       audioRef.current.play().catch(console.error);
     }
   };
